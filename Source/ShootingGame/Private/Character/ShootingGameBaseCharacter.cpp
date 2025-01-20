@@ -2,6 +2,9 @@
 
 
 #include "Character/ShootingGameBaseCharacter.h"
+#include "AbilitySystem/ShootingGameASC.h"
+#include "AbilitySystem/ShootingGameAttributeSet.h"
+#include "Components/SkeletalMeshComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -13,13 +16,23 @@ AShootingGameBaseCharacter::AShootingGameBaseCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
 	GetMesh()->bReceivesDecals = false;
+
+	ShootingGameASC= CreateDefaultSubobject<UShootingGameASC>(TEXT("AbilitySystemComponent"));
+	ShootingGameAttributeSet = CreateDefaultSubobject<UShootingGameAttributeSet>(TEXT("AttributeSet"));
+
 }
-void AShootingGameBaseCharacter::TurnInPlaceEnd()
+
+UAbilitySystemComponent* AShootingGameBaseCharacter::GetAbilitySystemComponent() const
 {
-	bTurnLeft = false;
-	bTurnRight = false;
+	return GetShootingGameASC();
+}
 
-
-	GetCharacterMovement()->bUseControllerDesiredRotation = false;
-	GetCharacterMovement()->bOrientRotationToMovement = false;
+void AShootingGameBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	if (ShootingGameASC)
+	{
+		ShootingGameASC->InitAbilityActorInfo(this, this);
+		ensureMsgf(!(StartUpData.IsNull()), TEXT("Forgot to assign startup data %s"), *GetName());
+	}
 }

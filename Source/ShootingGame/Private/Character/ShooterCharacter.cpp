@@ -11,6 +11,9 @@
 #include "Component/Input/ShootingGmaeInputComponent.h"
 #include "ShootingGameGameplayTags.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "AbilitySystem/ShootingGameASC.h"
+#include "AbilitySystem/ShootingGameAttributeSet.h"
+#include "DataAsset/StartUpData/DataAsset_StartUpDataBase.h"
 
 #include "ShootingGameDegubHelper.h"
 
@@ -38,6 +41,20 @@ AShooterCharacter::AShooterCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
+void AShooterCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	if (!StartUpData.IsNull())
+	{
+		if (UDataAsset_StartUpDataBase* LoadData = StartUpData.LoadSynchronous())
+		{
+			LoadData->GiveToAbilitySystemComponent(ShootingGameASC);
+		}
+
+	}
+}
+
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgat to assgin a vaild data asset as input config"))
@@ -59,8 +76,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	//Debug::Print(TEXT("Start"));
 }
 
 void AShooterCharacter::Input_Move(const FInputActionValue& InputActionVale)
@@ -93,17 +108,6 @@ void AShooterCharacter::Input_Look(const FInputActionValue& InputActionVale)
 
 		FRotator Rot = UKismetMathLibrary::NormalizedDeltaRotator(GetControlRotation(), GetActorRotation());
 		float Yaw = Rot.Yaw;
-
-		if (Yaw > 90.f)
-		{
-			bTurnRight = true;
-			GetCharacterMovement()->bUseControllerDesiredRotation = true;
-		}
-		if (Yaw < -90.f)
-		{
-			bTurnLeft = true;
-			GetCharacterMovement()->bUseControllerDesiredRotation = true;
-		}
 	}
 
 	if (LookAxisVector.Y != 0.f)

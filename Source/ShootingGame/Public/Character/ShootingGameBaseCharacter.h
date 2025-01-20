@@ -4,10 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "ShootingGameBaseCharacter.generated.h"
 
+class UShootingGameASC;
+class UDataAsset_StartUpDataBase;
+class UShootingGameAttributeSet;
+
 UCLASS()
-class SHOOTINGGAME_API AShootingGameBaseCharacter : public ACharacter
+class SHOOTINGGAME_API AShootingGameBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -15,13 +20,25 @@ public:
 	// Sets default values for this character's properties
 	AShootingGameBaseCharacter();
 
-	FORCEINLINE bool GetTurnLeft() const { return bTurnLeft; }
-	FORCEINLINE bool GetTurnRight() const { return bTurnRight; }
+	//~Begin IAbilitySystemInterface
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	//~End IAbilitySystemInterface
 
-	UFUNCTION(BlueprintCallable)
-	void TurnInPlaceEnd();
+	FORCEINLINE UShootingGameASC* GetShootingGameASC() const { return ShootingGameASC; }
+	FORCEINLINE UShootingGameAttributeSet* GetAttributeSet() const { return ShootingGameAttributeSet; }
 
 protected:
-	bool bTurnLeft = false;
-	bool bTurnRight = false;
+
+	//~Begin APawn interface
+	virtual void PossessedBy(AController* NewController) override;
+	//~End APawn interface
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
+	UShootingGameASC* ShootingGameASC;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
+	UShootingGameAttributeSet* ShootingGameAttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Data")
+	TSoftObjectPtr<UDataAsset_StartUpDataBase> StartUpData;
 };

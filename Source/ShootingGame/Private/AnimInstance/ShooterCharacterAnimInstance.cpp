@@ -31,9 +31,5 @@ void UShooterCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaS
 	{
 		OwningCharacter->bUseControllerRotationYaw = false;
 	}
-
-	bTurnLeft = OwningCharacter->GetTurnLeft();
-	bTurnRight = OwningCharacter->GetTurnRight();
-
 	LocomationDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(), OwningCharacter->GetActorRotation());
 }
