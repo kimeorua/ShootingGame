@@ -2,4 +2,54 @@
 
 
 #include "AbilitySystem/ShootingGameASC.h"
+#include "AbilitySystem/Abilities/ShootingGameGameplayAbility.h"
 
+void UShootingGameASC::OnAbilityInputPressed(const FGameplayTag& InInputTag)
+{
+	if (!InInputTag.IsValid()) { return; }
+
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (!AbilitySpec.DynamicAbilityTags.HasTagExact(InInputTag)) { continue; }
+
+		TryActivateAbility(AbilitySpec.Handle);
+	}
+}
+
+void UShootingGameASC::OnAbilityInputReleased(const FGameplayTag& InInputTag)
+{
+}
+
+void UShootingGameASC::GraintShooterWeaponAbilities(const TArray<FShooterAbilitySet>& InDefalutWeaponAbility, int32 ApplyLevel, TArray <FGameplayAbilitySpecHandle >& OutGraintedAbilitySpecHandle)
+{
+	if (InDefalutWeaponAbility.IsEmpty())
+	{
+		return;
+	}
+	for (const FShooterAbilitySet& AbilitySet : InDefalutWeaponAbility)
+	{
+		if (!AbilitySet.IsVaild()) { continue; }
+
+		FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
+		AbilitySpec.SourceObject = GetAvatarActor();
+		AbilitySpec.Level = ApplyLevel;
+		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
+
+		OutGraintedAbilitySpecHandle.AddUnique(GiveAbility(AbilitySpec));
+	}
+}
+
+void UShootingGameASC::RemoveShooterWeaponAbilities(UPARAM(ref) TArray<FGameplayAbilitySpecHandle>& InSpecHandleToRemove)
+{
+	if (InSpecHandleToRemove.IsEmpty()) { return; }
+
+	for (const FGameplayAbilitySpecHandle& SpecHandle : InSpecHandleToRemove)
+	{
+		if (SpecHandle.IsValid())
+		{
+			ClearAbility(SpecHandle);
+		} 
+	}
+
+	InSpecHandleToRemove.Empty();
+}

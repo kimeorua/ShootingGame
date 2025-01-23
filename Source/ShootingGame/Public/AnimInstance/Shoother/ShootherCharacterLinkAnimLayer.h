@@ -6,6 +6,8 @@
 #include "AnimInstance/ShootingGameBaseAnimInstance.h"
 #include "ShootherCharacterLinkAnimLayer.generated.h"
 
+class UShooterPlayerAnimInstance;
+
 /**
  * 
  */
@@ -14,4 +16,7 @@ class SHOOTINGGAME_API UShootherCharacterLinkAnimLayer : public UShootingGameBas
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintPure, meta = (BlueprintThreadSafe))
+	UShooterPlayerAnimInstance* GetShooterPlayerAnimInstance() const;
 };

@@ -14,6 +14,7 @@
 #include "AbilitySystem/ShootingGameASC.h"
 #include "AbilitySystem/ShootingGameAttributeSet.h"
 #include "DataAsset/StartUpData/DataAsset_StartUpDataBase.h"
+#include "Component/Combet/ShooterCombetComponent.h"
 
 #include "ShootingGameDegubHelper.h"
 
@@ -39,6 +40,8 @@ AShooterCharacter::AShooterCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 120.f, 0.f);
 	GetCharacterMovement()->MaxWalkSpeed = 220.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
+
+	ShooterCombetComponent = CreateDefaultSubobject<UShooterCombetComponent>(TEXT("ShooterCombetComponent"));
 }
 
 void AShooterCharacter::PossessedBy(AController* NewController)
@@ -71,6 +74,9 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 
 	ShootingGmaeInputComponent->BindNativeInputAction(InputConfigDataAsset, ShootingGameTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	ShootingGmaeInputComponent->BindNativeInputAction(InputConfigDataAsset, ShootingGameTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+
+	ShootingGmaeInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
+
 }
 
 void AShooterCharacter::BeginPlay()
@@ -114,4 +120,14 @@ void AShooterCharacter::Input_Look(const FInputActionValue& InputActionVale)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AShooterCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	ShootingGameASC->OnAbilityInputPressed(InInputTag);
+}
+
+void AShooterCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	ShootingGameASC->OnAbilityInputReleased(InInputTag);
 }

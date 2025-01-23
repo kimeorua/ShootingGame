@@ -2,4 +2,9 @@
 
 
 #include "AnimInstance/Shoother/ShootherCharacterLinkAnimLayer.h"
+#include "AnimInstance/Shoother/ShooterPlayerAnimInstance.h"
 
+UShooterPlayerAnimInstance* UShootherCharacterLinkAnimLayer::GetShooterPlayerAnimInstance() const
+{
+    return Cast<UShooterPlayerAnimInstance>(GetOwningComponent()->GetAnimInstance());
+}

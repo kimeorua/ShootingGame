@@ -2,6 +2,7 @@
 
 
 #include "AbilitySystem/Abilities/ShootingGameGameplayAbility.h"
+#include "Component/Combet/PawnCombetComponentBase.h"
 #include "AbilitySystem/ShootingGameASC.h"
 
 void UShootingGameGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec)
@@ -29,4 +30,14 @@ void UShootingGameGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle H
 		}
 	}
 
+}
+
+UPawnCombetComponentBase* UShootingGameGameplayAbility::GetPawnCombetComponentFromActorInfo() const
+{
+	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombetComponentBase>();
+}
+
+UShootingGameASC* UShootingGameGameplayAbility::GetShooterAbilitySystemComponentFromActorInfo() const
+{
+	return Cast<UShootingGameASC>(CurrentActorInfo->AbilitySystemComponent);
 }

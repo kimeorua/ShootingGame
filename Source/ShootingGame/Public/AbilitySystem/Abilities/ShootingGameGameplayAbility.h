@@ -6,6 +6,9 @@
 #include "Abilities/GameplayAbility.h"
 #include "ShootingGameGameplayAbility.generated.h"
 
+class UPawnCombetComponentBase;
+class UShootingGameASC;
+
 UENUM(BlueprintType)
 enum class EAbilityActivationPolicy : uint8
 {
@@ -29,4 +32,10 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "ShootingGame Ability")
 	EAbilityActivationPolicy AbilityActivationPolicy = EAbilityActivationPolicy::OnTriggered;
+
+	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
+	UPawnCombetComponentBase* GetPawnCombetComponentFromActorInfo() const;
+
+	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
+	UShootingGameASC* GetShooterAbilitySystemComponentFromActorInfo() const;
 };

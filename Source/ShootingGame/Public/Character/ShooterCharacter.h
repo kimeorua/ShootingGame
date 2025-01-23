@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "Character/ShootingGameBaseCharacter.h"
+#include "GameplayTagContainer.h"
 #include "ShooterCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
+class UShooterCombetComponent;
 
 /**
  * 
@@ -37,6 +39,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* FllowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combet", meta = (AllowPrivateAccess = "true"))
+	UShooterCombetComponent* ShooterCombetComponent;
 #pragma endregion
 
 #pragma region Inputs
@@ -46,6 +51,12 @@ private:
 	void Input_Move(const FInputActionValue& InputActionVale);
 	void Input_Look(const FInputActionValue& InputActionVale);
 
+	void Input_AbilityInputPressed(FGameplayTag InInputTag);
+	void Input_AbilityInputReleased(FGameplayTag InInputTag);
+
 #pragma endregion
 
+
+public:
+	FORCEINLINE UShooterCombetComponent* GetShooterCombetComponent() const { return ShooterCombetComponent; }
 };
