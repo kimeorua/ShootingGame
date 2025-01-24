@@ -111,9 +111,6 @@ void AShooterCharacter::Input_Look(const FInputActionValue& InputActionVale)
 	if (LookAxisVector.X != 0.f)
 	{
 		AddControllerYawInput(LookAxisVector.X);
-
-		FRotator Rot = UKismetMathLibrary::NormalizedDeltaRotator(GetControlRotation(), GetActorRotation());
-		float Yaw = Rot.Yaw;
 	}
 
 	if (LookAxisVector.Y != 0.f)

@@ -5,6 +5,9 @@
 #include "Character/ShootingGameBaseCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "KismetAnimationLibrary.h"
+#include "AbilitySystem/ShootingGameASC.h"
+#include "ShootingGameFunctionLibrary.h"
+#include "ShootingGameGameplayTags.h"
 
 void UShooterCharacterAnimInstance::NativeInitializeAnimation()
 {
@@ -22,8 +25,8 @@ void UShooterCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaS
 
 	GroundSpeed = OwningCharacter->GetVelocity().Size2D();
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D() > 0.f;
-
-	if (bHasAcceleration)
+	bHasZoomIn = UShootingGameFunctionLibrary::NativeDoseActorHaveTag(OwningCharacter, ShootingGameTags::Player_Status_Zoom);
+	if (bHasAcceleration || bHasZoomIn)
 	{
 		OwningCharacter->bUseControllerRotationYaw = true;
 	}

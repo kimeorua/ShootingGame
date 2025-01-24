@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/ShootingGameASC.h"
 #include "AbilitySystem/Abilities/ShootingGameGameplayAbility.h"
+#include "ShootingGameGameplayTags.h"
 
 void UShootingGameASC::OnAbilityInputPressed(const FGameplayTag& InInputTag)
 {
@@ -18,6 +19,18 @@ void UShootingGameASC::OnAbilityInputPressed(const FGameplayTag& InInputTag)
 
 void UShootingGameASC::OnAbilityInputReleased(const FGameplayTag& InInputTag)
 {
+	if (!InInputTag.IsValid() || !InInputTag.MatchesTag(ShootingGameTags::InputTag_HoldAction))
+	{
+		return;
+	}
+
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (AbilitySpec.DynamicAbilityTags.HasTagExact(InInputTag) && AbilitySpec.IsActive())
+		{
+			CancelAbilityHandle(AbilitySpec.Handle);
+		}
+	}
 }
 
 void UShootingGameASC::GraintShooterWeaponAbilities(const TArray<FShooterAbilitySet>& InDefalutWeaponAbility, int32 ApplyLevel, TArray <FGameplayAbilitySpecHandle >& OutGraintedAbilitySpecHandle)
