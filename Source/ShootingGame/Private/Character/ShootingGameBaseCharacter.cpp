@@ -27,6 +27,11 @@ UAbilitySystemComponent* AShootingGameBaseCharacter::GetAbilitySystemComponent()
 	return GetShootingGameASC();
 }
 
+UPawnCombetComponentBase* AShootingGameBaseCharacter::GetPawnCombetComponent() const
+{
+	return nullptr;
+}
+
 void AShootingGameBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

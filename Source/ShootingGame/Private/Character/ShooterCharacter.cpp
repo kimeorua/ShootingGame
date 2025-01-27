@@ -44,6 +44,11 @@ AShooterCharacter::AShooterCharacter()
 	ShooterCombetComponent = CreateDefaultSubobject<UShooterCombetComponent>(TEXT("ShooterCombetComponent"));
 }
 
+UPawnCombetComponentBase* AShooterCharacter::GetPawnCombetComponent() const
+{
+	return ShooterCombetComponent;
+}
+
 void AShooterCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
@@ -76,7 +81,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	ShootingGmaeInputComponent->BindNativeInputAction(InputConfigDataAsset, ShootingGameTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 
 	ShootingGmaeInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
-
 }
 
 void AShooterCharacter::BeginPlay()

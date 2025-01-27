@@ -27,5 +27,4 @@ public:
 protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|Refrence")
 	AShooterCharacter* OwningShooterCharacter;
-
 };

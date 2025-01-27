@@ -24,6 +24,10 @@ class SHOOTINGGAME_API AShooterCharacter : public AShootingGameBaseCharacter
 public:
 	AShooterCharacter();
 
+	// ~Begin ICombetComponentInterface
+	virtual  UPawnCombetComponentBase* GetPawnCombetComponent() const override;
+	// ~End ICombetComponentInterface
+
 protected:
 	//~Begin APawn interface
 	virtual void PossessedBy(AController* NewController) override;

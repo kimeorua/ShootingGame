@@ -41,5 +41,4 @@ struct FShooterCharacterWeaponData
 
 	 UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	 FName WeaponUnequipSocketName;
-
 }; 

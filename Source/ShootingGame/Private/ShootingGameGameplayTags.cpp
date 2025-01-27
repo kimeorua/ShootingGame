@@ -16,6 +16,7 @@ namespace ShootingGameTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction, "InputTag.HoldAction");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction_Dash, "InputTag.HoldAction.Dash");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction_Zoom, "InputTag.HoldAction.Zoom");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction_Fire, "InputTag.HoldAction.Fire");
 
 	// Player Tag
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_SMG11, "Player.Ability.Equip.SMG11");
@@ -24,6 +25,7 @@ namespace ShootingGameTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_AR4, "Player.Ability.Unequip.AR4");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Dash, "Player.Ability.Dash");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Zoom, "Player.Ability.Zoom");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Fire, "Player.Ability.Fire");
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_SMG11, "Player.Weapon.SMG11");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_AR4, "Player.Weapon.AR4");
@@ -35,4 +37,8 @@ namespace ShootingGameTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Dash, "Player.Status.Dash");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Zoom, "Player.Status.Zoom");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_GunFiring, "Player.Status.GunFiring");
+
+	// Shared Tag
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Fire, "Shared.Event.Fire");
 }

@@ -8,6 +8,8 @@
 #include "AbilitySystem/ShootingGameASC.h"
 #include "ShootingGameFunctionLibrary.h"
 #include "ShootingGameGameplayTags.h"
+#include "Component/Combet/PawnCombetComponentBase.h"
+
 
 void UShooterCharacterAnimInstance::NativeInitializeAnimation()
 {
@@ -25,6 +27,7 @@ void UShooterCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaS
 
 	GroundSpeed = OwningCharacter->GetVelocity().Size2D();
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D() > 0.f;
+	LocomationDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(), OwningCharacter->GetActorRotation());
 	bHasZoomIn = UShootingGameFunctionLibrary::NativeDoseActorHaveTag(OwningCharacter, ShootingGameTags::Player_Status_Zoom);
 	if (bHasAcceleration || bHasZoomIn)
 	{
@@ -34,5 +37,18 @@ void UShooterCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaS
 	{
 		OwningCharacter->bUseControllerRotationYaw = false;
 	}
-	LocomationDirection = UKismetAnimationLibrary::CalculateDirection(OwningCharacter->GetVelocity(), OwningCharacter->GetActorRotation());
+	Aim = OwningCharacter->GetBaseAimRotation().Pitch;
+
+	FGameplayTag WeaponTag = OwningCharacter->GetPawnCombetComponent()->CurrentEquippedWeaponTag;
+
+	if (WeaponTag == ShootingGameTags::Player_Weapon_SMG11)
+	{
+		AimOffsetType = EAimOffsetType::SMG11;
+	}
+
+	else if (WeaponTag == ShootingGameTags::Player_Weapon_AR4)
+	{
+		AimOffsetType = EAimOffsetType::AR4;
+	}
+
 }

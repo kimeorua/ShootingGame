@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AnimInstance/ShootingGameBaseAnimInstance.h"
+#include "ShootingType/ShootingGameEnumType.h"
 #include "ShooterCharacterAnimInstance.generated.h"
 
 class AShootingGameBaseCharacter;
@@ -37,8 +38,14 @@ public:
 	bool bHasAcceleration;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomationData")
+	bool bHasZoomIn;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomationData")
 	float LocomationDirection;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomationData")
-	float bHasZoomIn;
+	float Aim;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomationData")
+	EAimOffsetType AimOffsetType;
 };
