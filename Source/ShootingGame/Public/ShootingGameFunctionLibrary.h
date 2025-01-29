@@ -8,6 +8,7 @@
 #include "ShootingGameFunctionLibrary.generated.h"
 
 class UShootingGameASC;
+class AShootingGameProjectileBase;
 
 /**
  * 
@@ -30,4 +31,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Warrior | Function Library", meta = (DisplayName = "Dose Actor Have Tag", ExpandEnumAsExecs = "OutConfirmType"))
 	static void BP_DoseActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EShootingGameConfirmType& OutConfirmType);
+
+	UFUNCTION(BlueprintCallable, Category = "Warrior | Function Library")
+	static AShootingGameProjectileBase* SpawnProjectile(UClass* SpawnClass, FVector SpawnLocation, FRotator SpawnRotation);
 };

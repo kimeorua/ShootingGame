@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
 #include "Interface/CombetComponentInterface.h"
+#include "Interface/UIComponentInterface.h"
 #include "ShootingGameBaseCharacter.generated.h"
 
 class UShootingGameASC;
@@ -13,7 +14,7 @@ class UDataAsset_StartUpDataBase;
 class UShootingGameAttributeSet;
 
 UCLASS()
-class SHOOTINGGAME_API AShootingGameBaseCharacter : public ACharacter, public IAbilitySystemInterface, public ICombetComponentInterface
+class SHOOTINGGAME_API AShootingGameBaseCharacter : public ACharacter, public IAbilitySystemInterface, public ICombetComponentInterface, public IUIComponentInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +29,10 @@ public:
 	// ~Begin ICombetComponentInterface
 	virtual UPawnCombetComponentBase* GetPawnCombetComponent() const override;
 	// ~End ICombetComponentInterface
+
+	// ~Begin IUIComponentInterface
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	// ~End IUIComponentInterface
 
 	FORCEINLINE UShootingGameASC* GetShootingGameASC() const { return ShootingGameASC; }
 	FORCEINLINE UShootingGameAttributeSet* GetAttributeSet() const { return ShootingGameAttributeSet; }

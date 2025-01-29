@@ -27,3 +27,8 @@ UShooterCombetComponent* UShooterGameplayAbility::GetShooterCombetComponentFromA
 {
     return GetShooterCharacterFromActorInfo()->GetShooterCombetComponent();
 }
+
+UShooterUIComponent* UShooterGameplayAbility::GetShooterUIComponentFromActorInfo()
+{
+    return GetShooterCharacterFromActorInfo()->GetShooterUIComponent();
+}

@@ -15,6 +15,7 @@
 #include "AbilitySystem/ShootingGameAttributeSet.h"
 #include "DataAsset/StartUpData/DataAsset_StartUpDataBase.h"
 #include "Component/Combet/ShooterCombetComponent.h"
+#include "Component/UI/ShooterUIComponent.h"
 
 #include "ShootingGameDegubHelper.h"
 
@@ -42,11 +43,22 @@ AShooterCharacter::AShooterCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
 	ShooterCombetComponent = CreateDefaultSubobject<UShooterCombetComponent>(TEXT("ShooterCombetComponent"));
+	ShooterUIComponent = CreateDefaultSubobject<UShooterUIComponent>(TEXT("ShooterUIComponent"));
 }
 
 UPawnCombetComponentBase* AShooterCharacter::GetPawnCombetComponent() const
 {
 	return ShooterCombetComponent;
+}
+
+UPawnUIComponent* AShooterCharacter::GetPawnUIComponent() const
+{
+	return ShooterUIComponent;
+}
+
+UShooterUIComponent* AShooterCharacter::GetShooterUIComponent() const
+{
+	return ShooterUIComponent;
 }
 
 void AShooterCharacter::PossessedBy(AController* NewController)

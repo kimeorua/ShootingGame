@@ -12,6 +12,7 @@ class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
 class UShooterCombetComponent;
+class UShooterUIComponent;
 
 /**
  * 
@@ -27,6 +28,11 @@ public:
 	// ~Begin ICombetComponentInterface
 	virtual  UPawnCombetComponentBase* GetPawnCombetComponent() const override;
 	// ~End ICombetComponentInterface
+
+	// ~Begin IUIComponentInterface
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UShooterUIComponent* GetShooterUIComponent() const;
+	// ~End IUIComponentInterface
 
 protected:
 	//~Begin APawn interface
@@ -46,6 +52,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combet", meta = (AllowPrivateAccess = "true"))
 	UShooterCombetComponent* ShooterCombetComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
+	UShooterUIComponent* ShooterUIComponent;
 #pragma endregion
 
 #pragma region Inputs

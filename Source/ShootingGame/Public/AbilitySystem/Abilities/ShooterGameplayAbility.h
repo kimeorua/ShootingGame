@@ -9,6 +9,7 @@
 class AShooterCharacter;
 class AShooterPlayerController;
 class UShooterCombetComponent;
+class UShooterUIComponent;
 /**
  * 
  */
@@ -26,6 +27,9 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
 	UShooterCombetComponent* GetShooterCombetComponentFromActorInfo();
+
+	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
+	UShooterUIComponent* GetShooterUIComponentFromActorInfo();
 
 private:
 	TWeakObjectPtr<AShooterCharacter> CahcedShooterCharacter;

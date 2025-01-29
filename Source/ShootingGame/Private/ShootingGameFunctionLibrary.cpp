@@ -4,6 +4,8 @@
 #include "ShootingGameFunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/ShootingGameASC.h"
+#include "Kismet/GameplayStatics.h"
+#include "Item/Weapon/Projectile/ShootingGameProjectileBase.h"
 
 UShootingGameASC* UShootingGameFunctionLibrary::NativeGetWrroirASCFromActor(AActor* InActor)
 {
@@ -38,4 +40,18 @@ bool UShootingGameFunctionLibrary::NativeDoseActorHaveTag(AActor* InActor, FGame
 void UShootingGameFunctionLibrary::BP_DoseActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EShootingGameConfirmType& OutConfirmType)
 {
 	OutConfirmType = NativeDoseActorHaveTag(InActor, TagToCheck) ? EShootingGameConfirmType::Yes : EShootingGameConfirmType::No;
+}
+
+AShootingGameProjectileBase* UShootingGameFunctionLibrary::SpawnProjectile(UClass* SpawnClass, FVector SpawnLocation, FRotator SpawnRotation)
+{
+	UWorld* World = GEngine->GameViewport->GetWorld();
+	FActorSpawnParameters SpawnParameters;
+	SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	if (World)
+	{
+		AShootingGameProjectileBase* SpawnedProjectile = World->SpawnActor<AShootingGameProjectileBase>(SpawnClass, SpawnLocation, SpawnRotation, SpawnParameters);
+		return SpawnedProjectile;
+	}
+
+	return nullptr;
 }

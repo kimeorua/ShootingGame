@@ -32,6 +32,11 @@ UPawnCombetComponentBase* AShootingGameBaseCharacter::GetPawnCombetComponent() c
 	return nullptr;
 }
 
+UPawnUIComponent* AShootingGameBaseCharacter::GetPawnUIComponent() const
+{
+	return nullptr;
+}
+
 void AShootingGameBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

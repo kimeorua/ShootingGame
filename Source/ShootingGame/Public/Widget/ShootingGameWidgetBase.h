@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "ShootingGameWidgetBase.generated.h"
 
+class UShooterUIComponent;
+
 /**
  * 
  */
@@ -13,5 +15,10 @@ UCLASS()
 class SHOOTINGGAME_API UShootingGameWidgetBase : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
+protected:
+	virtual void NativeOnInitialized() override;
+
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Owning Shooter UIComponent Initalized"))
+	void BP_OnOwningShooterUIComponentInitalized(UShooterUIComponent* OwingShooterUIComponent);
 };

@@ -8,6 +8,7 @@
 
 class UPawnCombetComponentBase;
 class UShootingGameASC;
+class UPawnUIComponent;
 
 UENUM(BlueprintType)
 enum class EAbilityActivationPolicy : uint8
@@ -35,6 +36,9 @@ protected:
 
 	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
 	UPawnCombetComponentBase* GetPawnCombetComponentFromActorInfo() const;
+
+	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
+	UPawnUIComponent* GetPawnUIComponentFromActorInfo() const;
 
 	UFUNCTION(BlueprintPure, Category = "Shooter|Ability")
 	UShootingGameASC* GetShooterAbilitySystemComponentFromActorInfo() const;
