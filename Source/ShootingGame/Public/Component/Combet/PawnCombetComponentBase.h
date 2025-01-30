@@ -43,10 +43,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Shooter|Combet")
 	AShootingGameWeaponBase* GetShooterCurrentEquippedWeapon() const;
 
+	UFUNCTION(BlueprintCallable, Category = "Shooter|Combet", meta = (Categories = "Player.Weapon"))
+	void SaveCurrentAmmo(float CurrentAmmoToSave);
+
 	UPROPERTY(BlueprintReadWrite, Category = "Shooter|Combet")
 	FGameplayTag CurrentEquippedWeaponTag;
 
 private:
 	TMap<FGameplayTag, AShootingGameWeaponBase*> ShooterCarriedWeaponMap;
-	
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Shooter|Combet", meta = (AllowPrivateAccess = "true"))
+	TMap<FGameplayTag, float> ShooterCarriedWeaponAmmoMap;
 };

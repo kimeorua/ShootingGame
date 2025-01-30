@@ -41,4 +41,8 @@ namespace ShootingGameTags
 
 	// Shared Tag
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Fire, "Shared.Event.Fire");
+
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Data_CurrentAmmo, "Shared.Data.CurrentAmmo");
+
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_AmmoEmpty, "Shared.Status.AmmoEmpty");
 }

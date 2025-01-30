@@ -49,4 +49,8 @@ namespace ShootingGameTags
 
 	// Shared Tag
 	SHOOTINGGAME_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_Fire);
+
+	SHOOTINGGAME_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Data_CurrentAmmo);
+
+	SHOOTINGGAME_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_AmmoEmpty);
 }

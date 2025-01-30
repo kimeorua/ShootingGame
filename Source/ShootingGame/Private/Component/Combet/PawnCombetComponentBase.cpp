@@ -43,3 +43,8 @@ AShootingGameWeaponBase* UPawnCombetComponentBase::GetShooterCurrentEquippedWeap
 	}
 	return GetShooterCarriedWeaponByTag(CurrentEquippedWeaponTag);
 }
+
+void UPawnCombetComponentBase::SaveCurrentAmmo(float CurrentAmmoToSave)
+{
+    ShooterCarriedWeaponAmmoMap.Add(CurrentEquippedWeaponTag, CurrentAmmoToSave);
+}
