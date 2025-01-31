@@ -12,6 +12,7 @@ namespace ShootingGameTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAR4, "InputTag.EquipAR4");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipSMG11, "InputTag.UnequipSMG11");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAR4, "InputTag.UnequipAR4");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Reload, "InputTag.Reload");
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction, "InputTag.HoldAction");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HoldAction_Dash, "InputTag.HoldAction.Dash");
@@ -41,8 +42,11 @@ namespace ShootingGameTags
 
 	// Shared Tag
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Fire, "Shared.Event.Fire");
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Reload, "Shared.Event.Reload");
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Data_CurrentAmmo, "Shared.Data.CurrentAmmo");
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_AmmoEmpty, "Shared.Status.AmmoEmpty");
+
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Reload, "Shared.Ability.Reload");
 }
